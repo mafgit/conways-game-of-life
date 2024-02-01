@@ -46,9 +46,10 @@ void displayGrid(int **grid, int N) {
 
 int main() {
   // constants
-  const int N = 10; // for NxN grid
-  const int steps = 100;
-  const int dt = 2000; // milliseconds
+  const int N = 20; // for NxN grid
+  const int steps = 200;
+  const int dt = 1000;            // milliseconds
+  const int probOfLivingCell = 2; // out of 10
 
   srand(time(0));
   SetConsoleOutputCP(CP_UTF8); // for emojis
@@ -59,12 +60,14 @@ int main() {
     grid[i] = new int[N];
     for (int j = 0; j < N; j++) {
       int val = rand() % 10;
-      grid[i][j] = val <= 2;
+      grid[i][j] = val < probOfLivingCell;
     }
   }
 
   for (int i = 0; i < steps; i++) {
     Sleep(dt);
+
+    displayGrid(grid, N);
 
     for (int j = 0; j < N; j++) {
       for (int k = 0; k < N; k++) {
@@ -86,7 +89,7 @@ int main() {
       }
     }
 
-    displayGrid(grid, N);
+    // displayGrid(grid, N);
   }
 
   // delete
